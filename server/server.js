@@ -1,6 +1,7 @@
 require('./config/config');
 
 const express = require('express');
+const mg = require('mongoose');
 
 const app = express();
 
@@ -10,32 +11,11 @@ app.use(bp.urlencoded({extended:false}));
 
 app.use(bp.json());
 
-app.get('/', (req, res) => {
-  res.status(200).json({
-    ok: true,
-    msg: 'All fine'
-  });
-})
+app.use(require('./routes/users'))
 
-app.post('/products', (req, res) => {
-  let body = req.body;
-  if ( body.name === undefined ) {
-    res.status(400).json({
-      ok:false
-    }) 
-  }else {
-    res.status(201).json({
-      ok:true,      
-    });
-  }
-  })
-
-app.put('/products', (req, res) => {
-  res.send('put products');
-})
-
-app.delete('/products', (req, res) => {
-  res.send('delete products');
+mg.connect('mongodb+srv://falicona:mM97062755@cluster0-knfja.mongodb.net/shop?retryWrites=true&w=majority',{ useNewUrlParser: true,useUnifiedTopology: true }, (err, res) =>{
+  if(err) throw err;
+  console.log('Data base is ONLINE');
 })
 
 app.listen(process.env.PORT, () => {
