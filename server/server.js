@@ -10,7 +10,7 @@ app.use(bp.urlencoded({extended:false}));
 
 app.use(bp.json());
 
-app.get('/products', (req, res) => {
+app.get('/', (req, res) => {
   res.status(200).json({
     ok: true,
     msg: 'All fine'

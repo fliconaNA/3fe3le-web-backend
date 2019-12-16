@@ -11,6 +11,11 @@
       "src": "/products",
       "dest": "/server/server.js",
       "methods": ["POST"]
+    },
+    {
+      "src": "/",
+      "dest": "/server/server.js",
+      "methods": ["GET"]
     }
   ]
 }
