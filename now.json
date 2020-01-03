@@ -1,5 +1,5 @@
 {
-  "name": "3fe3le-backend",
+  "name": "3fe3le-web-backend",
   "version": 2,
   "builds": [{ "src": "server/server.js", "use": "@now/node-server" }],
   "cleanUrls": true,
