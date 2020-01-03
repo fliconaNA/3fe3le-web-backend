@@ -1,16 +1,21 @@
 {
+  "name": "3fe3le-backend",
   "version": 2,
   "builds": [{ "src": "server/server.js", "use": "@now/node-server" }],
+  "cleanUrls": true,
   "routes": [
     {
       "src": "/users",
       "dest": "/server/server.js",
-      "methods": ["GET","POST","PUT","DELETE"]
+      "methods": ["GET","POST"]
     },
     {
       "src": "/",
       "dest": "/server/server.js",
       "methods": ["GET"]
     }
+  ],
+  "rewrites": [
+    { "source": "/users", "destination": "/server/server.js" }
   ]
 }
