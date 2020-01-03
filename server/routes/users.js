@@ -8,8 +8,11 @@ const app = express();
 
 
 app.get('/users', (req, res) => {
-
-  User.find({})
+  let lmt = Number(req.query.lmt) || 0;
+  let since = Number(req.query.since) || 10;
+  User.find({status: true}, 'name email role status google img')
+    .skip(since)
+    .limit(lmt)
     .exec( (err, users)=>{
       if (err) {
         return res.status(400).json({
@@ -17,11 +20,13 @@ app.get('/users', (req, res) => {
           err
         });
       }
-
-      res.status(200).json({
-        ok: true,
-        users
-      });
+      User.countDocuments({status: true}, (err, count)=>{
+        res.status(200).json({
+          ok: true,
+          count,
+          users
+        });
+      })
     })
 
   
@@ -86,7 +91,28 @@ app.put('/users/:id', (req, res) => {
 })
 
 app.delete('/users/:id', (req, res) => {
-  res.send('delete users');
+  let id = req.params.id;
+
+  User.findByIdAndUpdate(id,{status: false},{new: true} ,(err, userDelete)=>{
+    if (err) {
+      return res.status(400).json({
+        ok:false,
+        err
+      })
+    }
+    if (!userDelete) {
+      return res.status(400).json({
+        ok: false,
+        err: {
+          msg: "User no found"
+        }
+      })
+    }
+    res.json({
+      ok:true,
+      userDelete
+    })
+  })
 })
 
 module.exports = app
