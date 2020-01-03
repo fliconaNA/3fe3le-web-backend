@@ -13,6 +13,16 @@
       "methods": ["POST"]
     },
     {
+      "src": "/users",
+      "dest": "/server/server.js",
+      "methods": ["PUT"]
+    },
+    {
+      "src": "/users",
+      "dest": "/server/server.js",
+      "methods": ["DELETE"]
+    },
+    {
       "src": "/",
       "dest": "/server/server.js",
       "methods": ["GET"]
