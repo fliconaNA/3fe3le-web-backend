@@ -13,7 +13,7 @@ app.use(bp.json());
 
 app.use(require('./routes/users'))
 
-mg.connect('mongodb+srv://falicona:mM97062755@cluster0-knfja.mongodb.net/shop?retryWrites=true&w=majority',{ useNewUrlParser: true,useUnifiedTopology: true }, (err, res) =>{
+mg.connect(process.env.URLDB,{ useNewUrlParser: true,useUnifiedTopology: true }, (err, res) =>{
   if(err) throw err;
   console.log('Data base is ONLINE');
 })
